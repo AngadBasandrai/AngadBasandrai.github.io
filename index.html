@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>angad basandrai</title>
+  <style>
+    hr {
+        border: none;
+        height: 2px;
+        background-color: #1a7a1a;
+    }
+
+    body {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      background: #c0c0c0;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR — always gray/silver, never changes ── */
+    .sidebar {
+      width: 160px;
+      min-width: 160px;
+      background: #808080;
+      border-right: 3px solid #000;
+      padding: 8px 6px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-name {
+      background: #000080;
+      color: #ffffff;
+      font-size: 12px;
+      padding: 4px 6px;
+      margin-bottom: 8px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .avatar-box {
+      width: 80px;
+      height: 80px;
+      background: #ffffff;
+      border: 2px inset #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #808080;
+      margin: 0 auto 8px auto;
+      overflow: hidden;
+    }
+    .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    hr { border: none; border-top: 1px solid #000; margin: 6px 0; }
+
+    .nav-btn {
+      display: block;
+      width: 100%;
+      background: #d4d0c8;
+      border: 2px outset #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+      text-align: left;
+      padding: 3px 6px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    .nav-btn:active { border-style: inset; }
+    .nav-btn.active { background: #808080; border-style: inset; color: #fff; }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+      margin-bottom: 6px;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+    .sidebar-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: #d4d0c8;
+      border: 2px outset #fff;
+      flex-shrink: 0;
+      overflow: hidden;
+      color: #000;
+    }
+    .sidebar-links a:hover { background: #b0aaa0; }
+    .sidebar-links a svg { display: block; }
+
+    .toggle-btn {
+      display: block;
+      width: 100%;
+      background: #d4d0c8;
+      border: 2px outset #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-align: center;
+      padding: 3px 6px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+    .toggle-btn:active { border-style: inset; }
+
+    .counter { margin-top: 12px; font-size: 11px; color: #222; text-align: center; }
+
+    /* ── MAIN — dark by default, light when .light ── */
+    .main {
+      flex: 1;
+      padding: 10px 16px;
+      background: #0d0d0d;
+      color: #33ff33;
+      border-left: 2px solid #333;
+    }
+    .main.light {
+      background: #ffffff;
+      color: #000000;
+      border-left: 2px solid #808080;
+    }
+
+    a { color: #33ff33; }
+    a:visited { color: #1a991a; }
+    .main.light a { color: #0000cc; }
+    .main.light a:visited { color: #551a8b; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .page-title {
+      background: #1a1a1a;
+      color: #33ff33;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 4px 8px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      border-left: 3px solid #33ff33;
+    }
+    .main.light .page-title {
+      background: #000080;
+      color: #ffffff;
+      border-left: none;
+    }
+
+    .page-body { font-size: 14px; line-height: 1.6; }
+    .page-body p { margin-bottom: 10px; }
+
+    .entry {
+      border: 1px solid #222;
+      background: #111;
+      padding: 6px 8px;
+      margin-bottom: 8px;
+    }
+    .main.light .entry { border: 1px solid #808080; background: #f0f0f0; }
+
+    .entry-title { font-weight: bold; font-size: 14px; color: #33ff33; margin-bottom: 4px;}
+    .main.light .entry-title { color: #000; }
+    .entry-sub { color: #1a7a1a; font-size: 12px; margin-bottom: 4px; }
+    .main.light .entry-sub { color: #444; }
+    .entry-desc { font-size: 13px; color: #2a992a; }
+    .main.light .entry-desc { color: #222; }
+
+    .cert-entry {
+      border: 1px solid #222;
+      background: #111;
+      padding: 6px 8px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .main.light .cert-entry { border: 1px solid #808080; background: #f0f0f0; }
+
+    .cert-logo {
+      width: 48px;
+      height: 48px;
+      border: 2px inset #333;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #1a7a1a;
+      flex-shrink: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+    .main.light .cert-logo { border: 2px inset #808080; background: #fff; color: #808080; }
+    .cert-logo img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+
+    .cert-content { flex: 1; }
+    .cert-title { font-weight: bold; font-size: 13px; color: #33ff33; }
+    .main.light .cert-title { color: #000; }
+    .cert-sub { color: #1a7a1a; font-size: 11px; margin-bottom: 3px; }
+    .main.light .cert-sub { color: #444; }
+    .cert-desc { font-size: 12px; color: #2a992a; margin-bottom: 4px; }
+    .main.light .cert-desc { color: #222; }
+
+    .misc-heading {
+      font-weight: bold;
+      font-size: 12px;
+      background: #111;
+      border: 1px solid #222;
+      color: #33ff33;
+      padding: 2px 6px;
+      margin: 6px 0 6px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .main.light .misc-heading { background: #d4d0c8; border: 1px solid #808080; color: #000; }
+
+    .misc-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      border: 1px solid #222;
+      background: #111;
+      padding: 5px 7px;
+      margin-bottom: 6px;
+    }
+    .main.light .misc-item { border: 1px solid #808080; background: #f0f0f0; }
+
+    .misc-icon {
+      width: 36px;
+      height: 36px;
+      border: 2px inset #333;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      color: #1a7a1a;
+      flex-shrink: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+    .main.light .misc-icon { border: 2px inset #808080; background: #fff; color: #808080; }
+    .misc-icon img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+
+    .misc-item-content { flex: 1; }
+    .misc-item-title { font-weight: bold; font-size: 12px; color: #33ff33; }
+    .main.light .misc-item-title { color: #000; }
+    .misc-item-sub { font-size: 11px; color: #1a7a1a; }
+    .main.light .misc-item-sub { color: #444; }
+    .misc-item-desc { font-size: 12px; color: #2a992a; }
+    .main.light .misc-item-desc { color: #222; }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <div class="sidebar">
+    <div class="sidebar-name">ANGAD BASANDRAI</div>
+    <div class="avatar-box">
+      <img src="main.jpg" alt="photo">
+    </div>
+    <hr>
+    <div class="sidebar-links">
+      <a href="AngadBasandrai.pdf" title="Resume">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="7" stroke="#000" stroke-width="1.2" fill="none"/>
+          <ellipse cx="8" cy="8" rx="3" ry="7" stroke="#000" stroke-width="1.2" fill="none"/>
+          <line x1="1" y1="8" x2="15" y2="8" stroke="#000" stroke-width="1.2"/>
+          <line x1="2" y1="5" x2="14" y2="5" stroke="#000" stroke-width="1"/>
+          <line x1="2" y1="11" x2="14" y2="11" stroke="#000" stroke-width="1"/>
+        </svg>
+      </a>
+      <a href="https://github.com/AngadBasandrai/" title="GitHub">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="#000" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </a>
+      <a href="https://x.com/AngadBasandrai" title="Twitter">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="#000" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/>
+        </svg>
+      </a>
+      <a href="https://discord.com/users/1354317283505475586" title="Discord">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="#000" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612z"/>
+        </svg>
+      </a>
+      <a href="mailto:angadbasandrai@gmail.com" title="Email">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="3" width="14" height="10" rx="1" stroke="#000" stroke-width="1.2" fill="none"/>
+          <polyline points="1,3 8,9 15,3" stroke="#000" stroke-width="1.2" fill="none"/>
+        </svg>
+      </a>
+    </div>
+    <hr>
+    <button class="nav-btn active" onclick="show('home',this)">Home</button>
+    <button class="nav-btn" onclick="show('projects',this)">Projects</button>
+    <button class="nav-btn" onclick="show('education',this)">Education</button>
+    <button class="nav-btn" onclick="show('certifications',this)">Certifications</button>
+    <button class="nav-btn" onclick="show('misc',this)">Misc</button>
+    <button class="toggle-btn" onclick="toggleTheme()" id="toggle-btn">[light mode]</button>
+    <div class="counter">Visitors: 00142</div>
+  </div>
+
+  <div class="main" id="main">
+
+    <div id="home" class="page active">
+      <div class="page-title">:: About Me ::</div>
+      <div class="page-body">
+        <p>18 yr old cs undergrad from india, batch of 29</p>
+        <br/>
+        <hr/>
+        <p>"Work harder, not smarter."</p>
+        <hr/>
+        <br/>
+        <p>I code, game, listen to music and stare at the stars.</p>
+        <br/>
+        <hr/>
+        <p>"If you gaze for long into an abyss, the abyss gazes also into you."</p>
+        <hr/>
+      </div>
+    </div>
+
+    <div id="projects" class="page">
+      <div class="page-title">:: Projects ::</div>
+      <br/>
+      <hr/>
+      <h3>&nbsp;&nbsp;&nbsp;<a href="https://github.com/AngadBasandrai/">Personal</a></h3>
+      <hr/>
+      <div class="entry">
+        <div class="entry-title">PyScorch</div>
+        <div class="entry-sub">python, cuda | 2026</div>
+        <div class="entry-desc">a lightweight neural net library implemented in python from scratch using numpy and cupy</div>
+        <div class="entry-desc">uses Kaiming initialisation to set weights to prevent vanishing gradients</div>
+        <div class="entry-desc">batching for large datasets to improve time taken and to prevent overfitting</div>    
+      </div>
+      <div class="entry">
+        <div class="entry-title">chronix-os</div>
+        <div class="entry-sub">x86asm, C | 2026</div>
+        <div class="entry-desc">a minimal operating system written from scratch in x86asm</div>
+        <div class="entry-desc">bootloader loads into protected-mode and loads a C kernel</div>
+        <div class="entry-desc">created a rudimentary IDT</div>
+      </div>
+      <div class="entry">
+        <div class="entry-title">snake-lab</div>
+        <div class="entry-sub">python | 2026</div>
+        <div class="entry-desc">a simple dqn to play the game of snake</div>
+        <div class="entry-desc">tweaked hyperparamateres to analyse effect of lr, &epsilon; decay and &gamma; on training</div>
+        <div class="entry-desc">ran a multi agent sim to showcase the models that learned the rules of the game the best</div>
+      </div>
+      <div class="entry">
+        <div class="entry-title">Physics Engine</div>
+        <div class="entry-sub">C++, OpenGL | 2025</div>
+        <div class="entry-desc">a lightweight physics engine coded from scratch in C++ using OpenGL</div>
+      </div>
+      <div class="entry">
+        <div class="entry-title">boids</div>
+        <div class="entry-sub">Unity, C# | 2023</div>
+        <div class="entry-desc">a faithful implementation of the Craig Reynolds' 'Boids' algorithm</div>
+        <div class="entry-desc">implemented multiple types of species to create more complex and more realistic flocking behaviours</div>
+      </div>
+
+      <br/><br/><br/><hr/>
+      <h3>&nbsp;&nbsp;&nbsp;<a href="https://github.com/0xIIEST/">0xIIEST</a></h3>
+      <hr/>
+
+      <div class="entry">
+        <div class="entry-title">lyrnios-ai</div>
+        <div class="entry-sub">python, react.js, fast-api, uvicorn | 2025</div>
+        <div class="entry-desc"><a href="lyrniosai.vercel.app">link</a></div>
+        <div class="entry-desc">a multimodal ai assistant that generates personalized learning content</div>
+        <div class="entry-desc">built in tts using puter.js</div>
+        <div class="entry-desc">math support via KaTeX</div>
+      </div>
+    </div>
+
+    <div id="education" class="page">
+      <div class="page-title">:: Education ::</div>
+      <div class="entry">
+        <div class="entry-title">IIEST Shibpur</div>
+        <div class="entry-sub">B. Tech Computer Science and Technology | 2025 - 2029</div>
+      </div>
+      <div class="entry">
+        <div class="entry-title">Kundan Vidya Mandir</div>
+        <div class="entry-sub">Class XII, PCM + Computer Science</div>
+        <div class="entry-desc">April 2023 - March 2025</div>
+        <div class="entry-desc">Grade: 90.2%</div>
+        <div class="entry-desc">Served as head boy of the school</div>
+        <div class="entry-desc">Captained the school chess team to multiple compeitions</div>
+      </div>
+      <div class="entry">
+        <div class="entry-title">Kundan Vidya Mandir</div>
+        <div class="entry-sub">Class X</div>
+        <div class="entry-desc">April 2011 - March 2023</div>
+        <div class="entry-desc">Grade: 94.2%</div>
+      </div>
+    </div>
+
+    <div id="certifications" class="page">
+      <div class="page-title">:: Certifications ::</div>
+      <div class="cert-entry">
+        <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/C560BAQHr9suxyJBXMw/company-logo_100_100/company-logo_100_100/0/1635534378870/stanford_university_logo?e=1781740800&v=beta&t=5eA9qSkrY9DwAyNYbjaSDNriiSromygreX1aL7AxdV4"/></div>
+        <div class="cert-content">
+          <div class="cert-title">Machine Learning Specialization</div>
+          <div class="cert-desc">Stanford University, DeepLearning.ai | March 2024</div>
+          <a href="https://www.coursera.org/account/accomplishments/specialization/GHJ2VE7PGCPF">[verify credential]</a>
+        </div>
+      </div>
+      <div class="cert-entry">
+        <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/C510BAQFCGqEmSwrc4w/company-logo_100_100/company-logo_100_100/0/1631338994369?e=1781740800&v=beta&t=Mqz4rTen1Og0khpP6Aq6vZRcsj5rHDDsdRRhoGd1BvA"/></div>
+        <div class="cert-content">
+          <div class="cert-title">The Evolving Universe</div>
+          <div class="cert-desc">Caltech | February 2023</div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/DBU2VY75DW9N">[verify credential]</a>
+        </div>
+      </div>
+      <div class="cert-entry">
+        <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/D4E0BAQGBQSFW_T23Uw/company-logo_100_100/company-logo_100_100/0/1685099501709/trinity_college_london_logo?e=1781740800&v=beta&t=lkKG7UA7kKzgIvy6HKhFMWyjSOOdZHdnp7IcavZ9Yyw"/></div>
+        <div class="cert-content">
+          <div class="cert-title">Electronic Keyboard, Grade 5</div>
+          <div class="cert-desc">Trinity College London | September 2022</div>
+        </div>
+      </div>
+      <div class="cert-entry">
+        <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/D4E0BAQGBQSFW_T23Uw/company-logo_100_100/company-logo_100_100/0/1685099501709/trinity_college_london_logo?e=1781740800&v=beta&t=lkKG7UA7kKzgIvy6HKhFMWyjSOOdZHdnp7IcavZ9Yyw"/></div>
+        <div class="cert-content">
+          <div class="cert-title">Theory of Music, Grade 2</div>
+          <div class="cert-desc">Trinity College London | December 2019</div>
+        </div>
+      </div>
+      <div class="cert-entry">
+        <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/C4D0BAQFSi1nlisxTcg/company-logo_100_100/company-logo_100_100/0/1631312234132?e=1781740800&v=beta&t=4KY4rEeDzJLys680bX49irlnL8VfKdwlWEFnTbmAfCE"/></div>
+        <div class="cert-content">
+          <div class="cert-title">Fundamentals of Music Theory</div>
+          <div class="cert-desc">The University of Edinburgh | January 2019</div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/2STWG9TU4RLE">[verify credential]</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="misc" class="page">
+      <div class="page-title">:: Misc ::</div>
+      <div class="misc-heading">About</div>
+      <div class="page-body">
+        <p>just a silly guy enjoying life</p>
+        <p><a href="https://open.spotify.com/playlist/5FhcqEunsibd1gmhsBsxci?si=bb0bc37715994f53">my elite spotify library</a>
+         <svg width="14" height="14" viewBox="0 0 16 16" fill="#1DB954" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 0C3.589 0 0 3.589 0 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm3.67 11.548a.499.499 0 0 1-.686.166c-1.88-1.149-4.243-1.409-7.028-.772a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.687zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.322-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.153 5.561 6.234 5.43 3.89 6.138a.75.75 0 0 1-.433-1.432c2.696-.817 7.18-.659 10.012 1.115a.75.75 0 1 1-.777 1.281z"/>
+        </svg>
+        </p>
+        <p>if not coding, then playing trackmania</p>
+      </div>
+
+      <br/><br/><br/><hr/>
+      <div class="misc-heading">Stuff I've done</div>
+      <hr/>
+      <div class="misc-item">
+        <div class="misc-icon"><img src="technofest.jpeg"/></div>
+        <div class="misc-item-content">
+          <div class="misc-item-title">Techno Fest 2024 - 1st Place</div>
+          <div class="misc-item-sub">Organised by BCM Foundation | Aug 2024</div>
+          <div class="misc-item-desc">Came first both individual and team, in Techno Fest 2024.</div>
+        </div>
+      </div>
+      <div class="misc-item">
+        <div class="misc-icon"><img src="rifle.jpg"/></div>
+        <div class="misc-item-content">
+          <div class="misc-item-title">District Shooting Championship (10m Air Pistol Jr. Men) - Silver Medal</div>
+          <div class="misc-item-sub">Organised by District Rifle Association, Ludhiana | June 2024</div>
+        </div>
+      </div>
+      <div class="misc-item">
+        <div class="misc-icon"><img src="rifle.jpg"/></div>
+        <div class="misc-item-content">
+          <div class="misc-item-title">District Shooting Championship (10m Air Pistol Men) - Gold Medal</div>
+          <div class="misc-item-sub">Organised by District Rifle Association, Ludhiana | June 2024</div>
+        </div>
+      </div>
+      <div class="misc-item">
+        <div class="misc-icon"><img src="sahodya.jpeg"/></div>
+        <div class="misc-item-content">
+          <div class="misc-item-title">Ludhiana Sahodaya Schools Complex Inter School Chess Competition, Runner Up</div>
+          <div class="misc-item-sub">Organised by Ludhiana Sahodaya Schools Complex (LSSC) | August 2023</div>
+        </div>
+      </div> 
+      <div class="misc-item">
+        <div class="misc-icon"><img src="techmanthan.jpeg"/></div>
+        <div class="misc-item-content">
+          <div class="misc-item-title">Tech Manthan 1.0, Winner</div>
+          <div class="misc-item-sub">Organised by BCM Arya Model Sr. Sec. School, Ludhiana | August 2023</div>
+        </div>
+      </div> 
+      <div class="misc-item">
+        <div class="misc-item-content">
+          <div class="misc-item-title">District Chess Championship - Silver Medal</div>
+          <div class="misc-item-sub">Organised by Ludhiana District Chess Association (LDCA) | August 2022</div>
+        </div>
+      </div> 
+      <div class="misc-item">
+        <div class="misc-icon"><img src="bharatkojano.jpeg"/></div>
+        <div class="misc-item-content">
+          <div class="misc-item-title">Bharat Ko Jano, Regional Level (North Zone), Second Runner Up</div>
+          <div class="misc-item-sub">Organised by Bharat Vikas Parishad | December 2018</div>
+          <div class="misc-item-sub">First place in state level for Bharat ko Jano and Second Runner Up in Regional Level</div>          
+        </div>
+      </div>      
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleTheme() {
+    const main = document.getElementById('main');
+    const isLight = main.classList.toggle('light');
+    document.getElementById('toggle-btn').textContent = isLight ? '[dark mode]' : '[light mode]';
+  }
+</script>
+</body>
+</html>
