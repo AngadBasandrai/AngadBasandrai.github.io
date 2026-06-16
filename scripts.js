@@ -52,7 +52,7 @@ function loadBlogs() {
       <div class="blog-excerpt">${post.excerpt}</div>
     `;
     item.addEventListener('click', () => {
-      window.location.href = `blogs/${post.slug}.html`;
+      window.location.href = `blogs/${post.slug}`;
     });
     container.appendChild(item);
   });
