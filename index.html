@@ -5,556 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>angad basandrai</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ── CSS VARS (dark default) ── */
-    :root {
-      --bg:          #0b0b0b;
-      --sidebar-bg:  #0f0f0f;
-      --panel-bg:    #0d0d0d;
-      --card-bg:     #111;
-      --border:      #1f3f1f;
-      --border-dim:  #161f16;
-      --accent:      #00e040;
-      --accent-dim:  #005520;
-      --text:        #b4e8b4;
-      --text-dim:    #5a8a5a;
-      --text-bright: #00f048;
-      --link:        #00e040;
-      --link-vis:    #008820;
-    }
-
-    body {
-      font-family: 'Share Tech Mono', 'Courier New', monospace;
-      font-size: 13px;
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* faint scanlines */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent 0px, transparent 3px,
-        rgba(0,224,64,0.018) 3px, rgba(0,224,64,0.018) 4px
-      );
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    a { color: var(--link); text-decoration: none; }
-    a:visited { color: var(--link-vis); }
-    a:hover { text-decoration: underline; color: #fff; }
-
-    hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 10px 0;
-    }
-
-    /* ── SITE HEADER ── */
-    .site-header {
-      background: var(--sidebar-bg);
-      border-bottom: 1px solid var(--border);
-      padding: 22px 28px 16px;
-      display: flex;
-      align-items: flex-end;
-      gap: 22px;
-    }
-
-    .header-name {
-      font-family: 'VT323', monospace;
-      font-size: 58px;
-      color: var(--text-bright);
-      line-height: 1;
-      letter-spacing: 3px;
-      text-shadow: 0 0 28px rgba(0,240,72,0.45);
-    }
-
-    .header-sub {
-      font-size: 12px;
-      color: var(--text-dim);
-      line-height: 1.8;
-      padding-bottom: 5px;
-      margin-left: auto;
-      text-align: right;
-    }
-    .header-sub b { color: var(--text-bright); font-weight: normal; }
-
-    /* ── LAYOUT ── */
-    .layout {
-      display: flex;
-      min-height: calc(100vh - 110px);
-    }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width: 176px;
-      min-width: 176px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border);
-      padding: 16px 12px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar-nav-area {
-      flex: 1;
-    }
-
-    .sidebar-bottom {
-      margin-top: auto;
-      padding-top: 12px;
-    }
-
-    .avatar-box {
-      width: 96px;
-      height: 96px;
-      border: 1px solid var(--accent);
-      box-shadow: 0 0 14px rgba(0,224,64,0.25), inset 0 0 10px rgba(0,224,64,0.04);
-      margin: 0 auto 14px;
-      overflow: hidden;
-      display: block;
-    }
-    .avatar-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .sidebar-links {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 5px;
-      justify-content: flex-start;
-      margin-bottom: 14px;
-    }
-    .sidebar-links a {
-      display: flex; align-items: center; justify-content: center;
-      width: 27px; height: 27px;
-      min-width: 27px;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      transition: border-color 0.12s, color 0.12s, box-shadow 0.12s;
-    }
-    .sidebar-links a:hover {
-      border-color: var(--accent);
-      color: var(--text-bright);
-      box-shadow: 0 0 7px rgba(0,224,64,0.3);
-      text-decoration: none;
-    }
-    .sidebar-links a svg { display: block; fill: currentColor; }
-
-    .nav-label {
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .nav-btn {
-      display: block;
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-left: 2px solid transparent;
-      color: var(--text-dim);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 13px;
-      text-align: left;
-      padding: 5px 8px;
-      margin-bottom: 1px;
-      cursor: pointer;
-      transition: color 0.1s, border-color 0.1s, background 0.1s;
-    }
-    .nav-btn:hover {
-      color: var(--text-bright);
-      background: rgba(0,224,64,0.05);
-      border-left-color: var(--accent-dim);
-    }
-    .nav-btn.active {
-      color: var(--text-bright);
-      border-left-color: var(--accent);
-      background: rgba(0,224,64,0.08);
-    }
-    .nav-btn.active::before { content: '> '; }
-
-    .toggle-btn {
-      display: block;
-      width: 100%;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px;
-      text-align: center;
-      padding: 5px;
-      cursor: pointer;
-      margin-top: 0;
-      transition: border-color 0.1s, color 0.1s;
-    }
-    .toggle-btn:hover { border-color: var(--accent); color: var(--text-bright); }
-
-    /* ── MAIN ── */
-    .main {
-      flex: 1;
-      padding: 24px 32px;
-      min-width: 0;
-    }
-
-    .page { display: none; }
-    .page.active { display: block; }
-
-    /* page title */
-    .page-title {
-      font-family: 'VT323', monospace;
-      font-size: 32px;
-      color: var(--text-bright);
-      letter-spacing: 3px;
-      margin-bottom: 22px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-      text-shadow: 0 0 12px rgba(0,240,72,0.35);
-    }
-
-    /* ── ENTRIES (projects, education) ── */
-    .entry {
-      background: var(--card-bg);
-      border: 1px solid var(--border-dim);
-      border-left: 3px solid var(--accent-dim);
-      padding: 11px 16px;
-      margin-bottom: 10px;
-      transition: border-left-color 0.15s, box-shadow 0.15s;
-    }
-    .entry:hover {
-      border-left-color: var(--accent);
-      box-shadow: -3px 0 10px rgba(0,224,64,0.12);
-    }
-
-    .entry-title {
-      font-family: 'VT323', monospace;
-      font-size: 24px;
-      color: var(--text-bright);
-      line-height: 1.1;
-      margin-bottom: 3px;
-    }
-    .entry-sub {
-      color: var(--text-dim);
-      font-size: 11px;
-      margin-bottom: 7px;
-      letter-spacing: 0.3px;
-    }
-    .entry-desc {
-      color: #6aaa6a;
-      font-size: 12px;
-      line-height: 1.6;
-      padding-left: 10px;
-      border-left: 1px solid var(--border-dim);
-      margin-top: 2px;
-    }
-
-    /* section separator with label */
-    .section-rule {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 22px 0 12px;
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .section-rule::before,
-    .section-rule::after {
-      content: '';
-      flex: 1;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── CERTS ── */
-    .cert-entry {
-      background: var(--card-bg);
-      border: 1px solid var(--border-dim);
-      border-left: 3px solid var(--accent-dim);
-      padding: 11px 16px;
-      margin-bottom: 10px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: border-left-color 0.15s;
-    }
-    .cert-entry:hover { border-left-color: var(--accent); }
-
-    .cert-logo {
-      width: 46px; height: 46px;
-      border: 1px solid var(--border);
-      background: #fff;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .cert-logo img { width: 100%; height: 100%; object-fit: contain; padding: 3px; display: block; }
-    .cert-content { flex: 1; }
-    .cert-title {
-      font-family: 'VT323', monospace;
-      font-size: 22px;
-      color: var(--text-bright);
-      line-height: 1.1;
-      margin-bottom: 3px;
-    }
-    .cert-desc { color: var(--text-dim); font-size: 11px; margin-bottom: 5px; }
-
-    /* ── MISC ── */
-    .misc-head {
-      font-family: 'VT323', monospace;
-      font-size: 20px;
-      color: var(--accent);
-      border: 1px solid var(--border);
-      background: rgba(0,224,64,0.04);
-      padding: 5px 12px;
-      margin: 20px 0 12px;
-      letter-spacing: 1px;
-    }
-
-    .misc-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border-dim);
-      border-left: 3px solid var(--accent-dim);
-      padding: 9px 14px;
-      margin-bottom: 7px;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      transition: border-left-color 0.15s;
-    }
-    .misc-item:hover { border-left-color: var(--accent); }
-
-    .misc-icon {
-      width: 34px; height: 34px;
-      border: 1px solid var(--border);
-      background: #000;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .misc-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
-    .misc-item-content { flex: 1; }
-    .misc-item-title {
-      font-family: 'VT323', monospace;
-      font-size: 19px;
-      color: var(--text-bright);
-      line-height: 1.2;
-    }
-    .misc-item-sub { color: var(--text-dim); font-size: 11px; margin-top: 2px; }
-    .misc-item-desc { color: #6aaa6a; font-size: 11px; margin-top: 2px; }
-
-    /* ── HOME ── */
-    .page-body { font-size: 14px; line-height: 1.75; }
-    .page-body p { margin-bottom: 14px; }
-
-    .quote {
-      border-left: 2px solid var(--accent-dim);
-      padding: 8px 16px;
-      margin: 16px 0;
-      color: var(--text-dim);
-      font-style: italic;
-      font-size: 13px;
-    }
-
-    /* ── WEBRING ── */
-    .webring-box {
-      border: 1px solid var(--border);
-      border-color: #e040fb;
-      padding: 10px 8px 8px;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .webring-name {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .webring-name .wt { color: #ffffff; }
-    .webring-name .wl { color: #e040fb; }
-
-    .webring-btns {
-      display: flex;
-      gap: 4px;
-      justify-content: center;
-    }
-
-    .webring-btn {
-      flex: 1;
-      background: transparent;
-      border: 1px solid #5b3d8a;
-      color: #c084fc;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      padding: 4px 2px;
-      cursor: pointer;
-      transition: border-color 0.12s, color 0.12s, background 0.12s;
-      letter-spacing: 0.5px;
-    }
-    .webring-btn:hover {
-      border-color: #e879f9;
-      color: #f0abfc;
-      background: rgba(168,139,250,0.08);
-    }
-
-    /* ── HAMBURGER / MOBILE OVERLAY ── */
-    .hamburger {
-      display: none;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      font-size: 18px;
-      line-height: 1;
-      padding: 6px 10px;
-      cursor: pointer;
-      font-family: monospace;
-      transition: border-color 0.1s, color 0.1s;
-      flex-shrink: 0;
-    }
-    .hamburger:hover { border-color: var(--accent); color: var(--text-bright); }
-
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: 200;
-    }
-    .sidebar-overlay.open { display: block; }
-
-    /* ── MOBILE WEBRING (bottom of page) ── */
-    .webring-mobile {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: var(--sidebar-bg);
-      border-top: 1px solid #5b3d8a;
-      padding: 8px 16px;
-      z-index: 100;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .webring-mobile .webring-name {
-      margin-bottom: 0;
-      white-space: nowrap;
-    }
-    .webring-mobile .webring-btns {
-      flex: 1;
-      justify-content: flex-end;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .hamburger { display: block; }
-
-      .site-header {
-        flex-wrap: wrap;
-        gap: 6px;
-        padding: 14px 14px 12px;
-        align-items: flex-start;
-      }
-      .header-top-row {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
-      }
-      .header-name { font-size: 38px; }
-      .header-sub {
-        width: 100%;
-        padding-bottom: 0;
-        font-size: 11px;
-        margin-left: 0;
-        text-align: left;
-      }
-
-      .layout { position: relative; }
-
-      /* sidebar drops from top, full width */
-      .sidebar {
-        position: fixed;
-        top: -100vh; left: 0; right: 0;
-        width: 100%;
-        height: auto;
-        max-height: 80vh;
-        z-index: 300;
-        transition: top 0.25s ease;
-        padding-bottom: 16px;
-        overflow-y: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        gap: 0;
-      }
-      .sidebar.open { top: 0; }
-
-      .avatar-box { width: 64px; height: 64px; margin: 0 12px 0 0; flex-shrink: 0; }
-
-      .sidebar-links { margin-bottom: 0; align-items: center; }
-
-      .sidebar-nav-area {
-        flex: 1;
-        min-width: 140px;
-      }
-
-      .sidebar-bottom {
-        width: 100%;
-        padding-top: 8px;
-        border-top: 1px solid var(--border);
-        margin-top: 8px;
-      }
-      .sidebar-bottom .webring-box { display: none; }
-
-      .main { padding: 16px 14px 100px; }
-
-      /* show mobile webring bar */
-      .webring-mobile { display: flex; }
-    }
-
-    @media (min-width: 641px) {
-      .webring-mobile { display: none !important; }
-      .hamburger { display: none !important; }
-      .header-top-row { display: contents; }
-    }
-    body.light {
-      --bg:          #efefef;
-      --sidebar-bg:  #e2e2e2;
-      --panel-bg:    #f8f8f8;
-      --card-bg:     #f8f8f8;
-      --border:      #bbb;
-      --border-dim:  #ccc;
-      --accent:      #0000aa;
-      --accent-dim:  #7070cc;
-      --text:        #222;
-      --text-dim:    #666;
-      --text-bright: #00008b;
-      --link:        #0000cc;
-      --link-vis:    #551a8b;
-    }
-    body.light::before { display: none; }
-    body.light .header-name { text-shadow: none; }
-    body.light .page-title  { text-shadow: none; }
-    body.light .sidebar-links a:hover { box-shadow: none; }
-    body.light .cert-logo { background: #fff; }
-    body.light .avatar-box { box-shadow: none; }
-    body.light .entry:hover { box-shadow: none; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="header-top-row">
       <div class="header-name">ANGAD BASANDRAI</div>
@@ -566,51 +20,43 @@
     </div>
   </header>
 
-  <!-- SIDEBAR OVERLAY (mobile tap-outside-to-close) -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-  <!-- MOBILE WEBRING BAR (fixed bottom) -->
   <div class="webring-mobile">
     <span class="webring-name"><span class="wt">thread</span><span class="wl">locked</span></span>
     <div class="webring-btns">
-      <button class="webring-btn" onclick="window.location.href='#'">&lt; prev</button>
-      <button class="webring-btn" onclick="window.location.href='#'">ring</button>
-      <button class="webring-btn" onclick="window.location.href='#'">next &gt;</button>
+      <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/redirect?from=angad&dir=prev'">&lt; prev</button>
+      <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/'">ring</button>
+      <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/redirect?from=angad&dir=next'">next &gt;</button>
     </div>
   </div>
 
   <div class="layout">
 
-    <!-- SIDEBAR -->
     <nav class="sidebar">
       <div class="avatar-box"><img src="main.jpg" alt="photo"></div>
 
       <div class="sidebar-links">
-        <!-- Resume -->
         <a href="AngadBasandrai.pdf" title="Resume">
           <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 0h5.5L13 3.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5 0v4h4L9 0zm-3 7h6v1H6V7zm0 2h6v1H6V9zm0 2h4v1H6v-1z"/>
           </svg>
         </a>
-        <!-- GitHub -->
         <a href="https://github.com/AngadBasandrai/" title="GitHub">
           <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
           </svg>
         </a>
-        <!-- X -->
         <a href="https://x.com/AngadBasandrai" title="X">
           <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/>
           </svg>
         </a>
-        <!-- Discord -->
         <a href="https://discord.com/users/1354317283505475586" title="Discord">
           <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612z"/>
           </svg>
         </a>
-        <!-- Email -->
         <a href="mailto:angadbasandrai@gmail.com" title="Email">
           <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
@@ -622,6 +68,7 @@
         <hr>
         <div class="nav-label">navigate</div>
         <button class="nav-btn active" onclick="show('home',this)">home</button>
+        <button class="nav-btn" onclick="show('blogs',this)">blogs</button>
         <button class="nav-btn" onclick="show('projects',this)">projects</button>
         <button class="nav-btn" onclick="show('education',this)">education</button>
         <button class="nav-btn" onclick="show('certifications',this)">certifications</button>
@@ -641,10 +88,8 @@
       </div>
     </nav>
 
-    <!-- MAIN -->
     <main class="main" id="main">
 
-      <!-- HOME -->
       <div id="home" class="page active">
         <div class="page-title">// about me</div>
         <div class="page-body">
@@ -655,12 +100,19 @@
         </div>
       </div>
 
-      <!-- PROJECTS -->
       <div id="projects" class="page">
         <div class="page-title">// projects</div>
 
         <div class="section-rule"><a href="https://github.com/AngadBasandrai/">personal &mdash; github.com/AngadBasandrai</a></div>
 
+        <div class="entry">
+          <div class="entry-title">tune-ai</div>
+          <div class="entry-sub">python, peft &middot; 2026 &middot; <a href="blogs/tune-ai.html">read more</a></div>
+          <div class="entry-desc">reinforcement learning pipeline that uses scratch to fine-tune a 1.5B parameter LLM</div>
+          <div class="entry-desc">attached a custom value head and LoRA adapters to Qwen2.5 to train policy and value functions jointly</div>
+          <div class="entry-desc">used a Groq-hosted Llama model as a reward model</div>
+          <div class="entry-desc">implemented clipped surrogate loss, advantage estimation, and KL tracking across 60-step training runs</div>
+        </div>
         <div class="entry">
           <div class="entry-title">PyScorch</div>
           <div class="entry-sub">python, cuda &middot; 2026</div>
@@ -704,8 +156,6 @@
           <div class="entry-desc">math rendering via KaTeX</div>
         </div>
       </div>
-
-      <!-- EDUCATION -->
       <div id="education" class="page">
         <div class="page-title">// education</div>
         <div class="entry">
@@ -726,7 +176,6 @@
         </div>
       </div>
 
-      <!-- CERTIFICATIONS -->
       <div id="certifications" class="page">
         <div class="page-title">// certifications</div>
         <div class="cert-entry">
@@ -769,7 +218,6 @@
         </div>
       </div>
 
-      <!-- MISC -->
       <div id="misc" class="page">
         <div class="page-title">// misc</div>
         <div class="page-body">
@@ -837,31 +285,16 @@
         </div>
       </div>
 
+      <div id="blogs" class="page">
+        <div class="page-title">// blogs</div>
+        <div id="blog-list-container">
+          <div class="blog-loading">loading...</div>
+        </div>
+      </div>
+
     </main>
   </div>
 
-<script>
-  function show(id, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-    // close sidebar on mobile after nav
-    if (window.innerWidth <= 640) toggleSidebar(false);
-  }
-
-  function toggleTheme() {
-    const light = document.body.classList.toggle('light');
-    document.getElementById('toggle-btn').textContent = light ? '[ dark mode ]' : '[ light mode ]';
-  }
-
-  function toggleSidebar(force) {
-    const sidebar = document.querySelector('.sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    const isOpen = force !== undefined ? force : !sidebar.classList.contains('open');
-    sidebar.classList.toggle('open', isOpen);
-    overlay.classList.toggle('open', isOpen);
-  }
-</script>
+  <script src="scripts.js"></script>
 </body>
 </html>

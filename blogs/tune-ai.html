@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>tune.ai | angad basandrai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .blog-post { max-width: 680px; }
+    .blog-post h2 {
+      font-family: 'VT323', monospace;
+      font-size: 22px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin: 28px 0 8px;
+    }
+    .blog-post p { margin-bottom: 14px; line-height: 1.8; font-size: 13px; }
+    .blog-post code {
+      background: var(--card-bg);
+      border: 1px solid var(--border-dim);
+      padding: 1px 5px;
+      font-size: 12px;
+      color: var(--text-bright);
+    }
+    .blog-post pre {
+      background: var(--card-bg);
+      border: 1px solid var(--border-dim);
+      border-left: 3px solid var(--accent-dim);
+      padding: 12px 16px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .blog-post pre code { background: none; border: none; padding: 0; }
+    .blog-meta {
+      color: var(--text-dim);
+      font-size: 11px;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .back-link:hover { color: var(--text-bright); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-name">ANGAD BASANDRAI</div>
+    <div class="header-sub">
+      <b>CS Undergrad</b> @ IIEST Shibpur &nbsp;·&nbsp; batch of '29<br>
+      18 yr old &nbsp;·&nbsp; codes, games, stargazes
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="main">
+      <div class="blog-post">
+        <a class="back-link" href="../index.html">&lt; back</a>
+
+        <div class="page-title">// tune.ai</div>
+        <div class="blog-meta">june 2026 &nbsp;&middot;&nbsp; python, peft</div>
+
+        <p>
+            If you've spent any time with Claude Code, Cursor or any modern coding agent, you've probably noticed something
+            frustating, they burn through tokens surprisingly quickly. Much of this cost comes from redundant reasoning, repeated 
+            context retrieval, and inefficient planning. So I had a plan, to take a large language model and somehow to make it 
+            optimise prompts to improve token efficiency and response accuracy.
+        </p>
+        <p>
+            Wanting to understand whether this problem had already been studied, I explored prior work on RLHF and prompt optimization.
+            While my approach differs from existing methods, papers such as InstructGPT (Ouyang et al., 2022), PRewrite (Kong et al., 2024),\
+            and StablePrompt (2024) provided valuable inspiration.
+        </p>
+
+        <h2>// the setup</h2>
+        <p>
+          The policy model is Qwen2.5-1.5B-Instruct fine-tuned using LoRA adapters on all attention projections (r=16, alpha=32).
+          On top of the base model I attached a small linear value head that maps from hidden states to scalar value estimates,
+          trained jointly with the policy.  This follows the standard actor-critic formulation used in PPO-based reinforcement learning.
+        </p>
+        <p>
+          To train the model, I generated 60 synthetic noisy restaurant orders containing filler words, typos,
+          corrections, and conversational phrasing—for example: "hey um can i get a burger with no onions and
+          maybe a large soda? actually make that diet. and freis too thanks". The desired output is a compact,
+          normalized representation such as "burger (no onions) | soda (large, diet) | fries". Although the task
+          itself is simple, the noisy inputs require the model to learn semantic compression, typo correction,
+          and structure extraction.
+        </p>
+        <p>
+          Note: Restaurant order parsing was only chosen as a proof of concept, because it provides a simple, intuitive
+          and easily evaluable environment for experimentation. The underlying approach however, is domain-agnostic.
+          By replacing the training data and reward function, the same framework can be applied to prompt rewriting,
+          query optimisation, or any setting where a model must learn to generate more useful or efficient intermediate
+          representations.
+        </p>
+
+        <h2>// the reward</h2>
+        <p>
+          This is arguably the most interesting part. Instead of designing a hand-written reward function,
+          I used a Groq-hosted Llama-3.1-8B model as an AI reward model. Each training sample requires
+          two LLM calls:
+        </p>
+        <p>
+          1. The model's structured output is passed to Llama as a restaurant order to process and confirm.
+          The result is a natural-language response such as: "Got it - one burger with no onions, one large
+          diet soda, and fries."
+        </p>
+        <p>
+          2. The original messy order, the structured output, and the generated confirmation are passed to a second
+          Llama call, which scores how well the final answer satisfies the original request, on a scale of 0 to 10,
+          which is normalised to [0, 1] and used as the PPO reward.
+        </p>
+        <p>
+          This reward signal is inherently noisy: the same output may receive slightly different scores
+          across evaluations. However, over many training iterations the signal remains useful. The model
+          gradually learns that vague or partially structured outputs tend to score lower than clean,
+          normalized representations.
+        </p>
+        <p>
+          In effect, this turns the system into a lightweight form of Reinforcement Learning from AI
+          Feedback (RLAIF), where another language model acts as the evaluator instead of a human.
+        </p>
+
+        <h2>// what worked</h2>
+
+        <p>
+          The model does learn. By the second epoch, the outputs are noticeably cleaner than at the start.
+          The pipe-separated format emerges consistently, filler words such as "um", "hey", and "actually"
+          mostly disappear, and modifiers tend to attach to the correct items.
+        </p>
+
+        <p>
+          Using a real LLM as the reward model worked better than I expected. It captures mistakes that a
+          regex-based scorer would likely miss, such as dropped modifiers, incorrect associations between
+          items and attributes, or subtle semantic mismatches.
+        </p>
+
+        <h2>// what didn't</h2>
+
+        <p>
+          60 samples is simply too few. The model appears to quickly overfits the phrasing patterns present in the
+          synthetic data and struggles on inputs that deviate from those templates. Increasing the diversity
+          of the data generator would likely improve generalization considerably.
+        </p>
+
+        <p>
+          The reward is expensive. At the default settings, a full run requires
+          3 epochs * 20 steps * 4 samples * 2 LLM calls = 480 Groq API calls.
+          Even with a fast inference provider, rate limits and network latency become noticeable.
+          Fine for a weekend project—less so for larger-scale experiments.
+        </p>
+
+        <p>
+          Training on CPU is slow but surprisingly workable. A 1.5B parameter model with LoRA adapters
+          fits comfortably in float32, though each PPO step takes noticeably longer than on GPU.
+        </p>
+
+        <h2>// code</h2>
+
+        <p>
+          Full code is available on GitHub:
+        <a href="https://github.com/AngadBasandrai/tune-ai">github.com/AngadBasandrai/tune-ai</a>
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
