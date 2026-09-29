@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
-  <title id="title">Caltech</title>
-  <rect x="1" y="1" width="62" height="62" fill="#090e09" stroke="#5cff75" stroke-width="2"/>
-  <circle cx="32" cy="32" r="24" fill="none" stroke="#1f4b29"/>
-  <text x="32" y="37" text-anchor="middle" fill="#5cff75" font-family="monospace" font-size="21" font-weight="700">CIT</text>
-</svg>

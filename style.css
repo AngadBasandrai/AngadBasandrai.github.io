@@ -680,18 +680,20 @@ ul {
 
 .cert {
   display: grid;
-  grid-template-columns: 42px 1fr auto;
+  grid-template-columns: 116px 1fr auto;
   align-items: center;
   gap: 16px;
-  min-height: 72px;
+  min-height: 78px;
   padding: 12px 10px;
   border-bottom: 1px solid var(--line);
 }
 
 .cert img {
-  width: 40px;
-  height: 40px;
+  width: 108px;
+  height: 48px;
+  padding: 5px 7px;
   object-fit: contain;
+  object-position: left center;
   background: #eceee9;
   border: 1px solid #c8cbc5;
 }
@@ -971,13 +973,14 @@ ul {
   }
 
   .cert {
-    grid-template-columns: 38px 1fr;
+    grid-template-columns: 88px 1fr;
     gap: 12px;
   }
 
   .cert img {
-    width: 36px;
-    height: 36px;
+    width: 82px;
+    height: 44px;
+    padding: 5px;
   }
 
   .cert > a {
