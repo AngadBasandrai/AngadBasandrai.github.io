@@ -258,43 +258,59 @@ ul {
   border-radius: 50%;
 }
 
-.webring {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 12px;
-  color: #eee;
-  border-top: 1px solid #3d2843;
-  font-size: 10px;
+.webring-box {
+  padding: 10px 8px 8px;
+  margin-top: 10px;
+  text-align: center;
+  border: 1px solid #e040fb;
 }
 
 .webring-name {
-  display: inline-flex;
-  align-items: baseline;
-  letter-spacing: -0.06em;
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.webring-name b {
+.webring-name .wt {
   color: #fff;
-  font-style: normal;
 }
 
-.webring-name i {
-  color: var(--purple);
-  font-style: normal;
-  font-weight: 600;
+.webring-name .wl {
+  color: #e040fb;
 }
 
-.webring > div {
+.webring-btns {
   display: flex;
-  gap: 7px;
+  justify-content: center;
+  gap: 4px;
 }
 
-.webring a {
-  color: var(--purple-soft);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+.webring-btn {
+  flex: 1;
+  padding: 4px 2px;
+  color: #c084fc;
+  background: transparent;
+  border: 1px solid #5b3d8a;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: border-color 120ms, color 120ms, background 120ms;
+}
+
+.webring-btn:hover,
+.webring-btn:focus-visible {
+  color: #f0abfc;
+  background: rgba(168, 139, 250, 0.08);
+  border-color: #e879f9;
+  text-decoration: none;
+}
+
+.webring-mobile {
+  display: none;
 }
 
 .sidebar-scrim {
@@ -927,6 +943,39 @@ ul {
     opacity: 1;
   }
 
+  .sidebar-bottom .webring-box {
+    display: none;
+  }
+
+  .webring-mobile {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--sidebar-bg);
+    border-top: 1px solid #5b3d8a;
+  }
+
+  .webring-mobile .webring-name {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  .webring-mobile .webring-btns {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .webring-mobile .webring-btn {
+    max-width: 74px;
+  }
+
   #content,
   #article {
     width: min(calc(100% - 36px), 900px);
@@ -934,6 +983,7 @@ ul {
     margin-left: auto;
     margin-right: auto;
     padding-top: 44px;
+    padding-bottom: 100px;
   }
 
   .intro {
