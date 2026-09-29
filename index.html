@@ -1,299 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Angad Basandrai, computer science undergraduate at IIEST Shibpur.">
+  <meta name="theme-color" content="#101211">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101211'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='monospace' font-size='30' fill='%2388a98d'%3EAB%3C/text%3E%3C/svg%3E">
   <title>angad basandrai</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#content">skip to content</a>
 
-  <header class="site-header">
-    <div class="header-top-row">
-      <div class="header-name">ANGAD BASANDRAI</div>
-      <button class="hamburger" id="hamburger-btn" onclick="toggleSidebar()" aria-label="menu">&#9776;</button>
-    </div>
-    <div class="header-sub">
-      <b>CS Undergrad</b> @ IIEST Shibpur &nbsp;·&nbsp; batch of '29<br>
-      18 yr old &nbsp;·&nbsp; codes, games, stargazes
-    </div>
+  <header class="mobile-header">
+    <a href="#home">angad basandrai</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar">menu</button>
   </header>
 
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar" aria-label="Site sidebar">
+    <div class="sidebar-top">
+      <a class="wordmark" href="#home">angad basandrai</a>
+      <img class="profile-image" src="main.jpg" alt="Angad Basandrai" width="88" height="88">
+      <p class="sidebar-role">CS Undergrad @ IIEST Shibpur<br>batch of '29</p>
 
-  <div class="webring-mobile">
-    <span class="webring-name"><span class="wt">thread</span><span class="wl">locked</span></span>
-    <div class="webring-btns">
-      <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/redirect?from=angad&dir=prev'">&lt; prev</button>
-      <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/'">ring</button>
-      <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/redirect?from=angad&dir=next'">next &gt;</button>
+      <nav class="tab-nav" aria-label="Primary navigation">
+        <a class="active" href="#home" data-tab="home"><span>01</span>home</a>
+        <a href="#projects" data-tab="projects"><span>02</span>projects</a>
+        <a href="#research" data-tab="research"><span>03</span>research</a>
+        <a href="#education" data-tab="education"><span>04</span>education</a>
+        <a href="#certifications" data-tab="certifications"><span>05</span>certifications</a>
+        <a href="#misc" data-tab="misc"><span>06</span>misc</a>
+        <a href="#blogs" data-tab="blogs"><span>07</span>blogs</a>
+      </nav>
+
+      <nav class="sidebar-links" aria-label="Sidebar profiles and contact">
+        <a href="https://github.com/AngadBasandrai" target="_blank" rel="noopener">github</a>
+        <a href="https://linkedin.com/in/angad-basandrai" target="_blank" rel="noopener">linkedin</a>
+        <a href="https://x.com/AngadBasandrai" target="_blank" rel="noopener">x</a>
+        <a href="https://codeforces.com/profile/AngadBasandrai" target="_blank" rel="noopener">codeforces</a>
+        <a href="mailto:angadbasandrai@gmail.com">email</a>
+        <a href="AngadBasandrai.pdf" target="_blank" rel="noopener">resume.pdf</a>
+      </nav>
     </div>
-  </div>
 
-  <div class="layout">
+    <div class="sidebar-bottom">
+      <div class="sidebar-status"><span><i></i> online</span><time id="clock">--:-- IST</time></div>
+      <div class="webring">
+        <span class="webring-name"><b>thread</b><i>locked</i></span>
+        <div>
+          <a href="https://ring.seggs.lol/redirect?from=angad&amp;dir=prev">&lt; prev</a>
+          <a href="https://ring.seggs.lol/">ring</a>
+          <a href="https://ring.seggs.lol/redirect?from=angad&amp;dir=next">next &gt;</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <button class="sidebar-scrim" type="button" aria-label="Close menu"></button>
 
-    <nav class="sidebar">
-      <div class="avatar-box"><img src="main.jpg" alt="photo"></div>
+  <main id="content">
+    <section class="tab-panel active" id="home">
+      <div class="intro">
+        <p class="path">/home/angad/about.txt</p>
+        <h1>angad basandrai<span class="cursor">_</span></h1>
+        <p>18 yr old cs undergrad from india, batch of 29</p>
+        <p>I code, game, listen to music and stare at the stars.</p>
 
-      <div class="sidebar-links">
-        <a href="AngadBasandrai.pdf" title="Resume">
-          <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 0h5.5L13 3.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5 0v4h4L9 0zm-3 7h6v1H6V7zm0 2h6v1H6V9zm0 2h4v1H6v-1z"/>
-          </svg>
-        </a>
-        <a href="https://github.com/AngadBasandrai/" title="GitHub">
-          <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-          </svg>
-        </a>
-        <a href="https://x.com/AngadBasandrai" title="X">
-          <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/>
-          </svg>
-        </a>
-        <a href="https://discord.com/users/1354317283505475586" title="Discord">
-          <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612z"/>
-          </svg>
-        </a>
-        <a href="mailto:angadbasandrai@gmail.com" title="Email">
-          <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-          </svg>
-        </a>
+        <nav class="identity-links" aria-label="Home profiles and contact">
+          <a href="https://github.com/AngadBasandrai" target="_blank" rel="noopener">github</a>
+          <a href="https://linkedin.com/in/angad-basandrai" target="_blank" rel="noopener">linkedin</a>
+          <a href="https://x.com/AngadBasandrai" target="_blank" rel="noopener">x</a>
+          <a href="https://codeforces.com/profile/AngadBasandrai" target="_blank" rel="noopener">codeforces</a>
+          <a href="mailto:angadbasandrai@gmail.com">email</a>
+        </nav>
       </div>
 
-      <div class="sidebar-nav-area">
-        <hr>
-        <div class="nav-label">navigate</div>
-        <button class="nav-btn active" onclick="show('home',this)">home</button>
-        <button class="nav-btn" onclick="show('blogs',this)">blogs</button>
-        <button class="nav-btn" onclick="show('projects',this)">projects</button>
-        <button class="nav-btn" onclick="show('education',this)">education</button>
-        <button class="nav-btn" onclick="show('certifications',this)">certifications</button>
-        <button class="nav-btn" onclick="show('misc',this)">misc</button>
+      <blockquote class="quote">
+        <span>motd:</span>
+        <p>"The higher we soar, the smaller we appear to those who cannot fly."</p>
+        <cite>Friedrich Nietzsche, Daybreak, aphorism 574</cite>
+      </blockquote>
+    </section>
+
+    <section class="section tab-panel" id="projects">
+      <header class="section-header">
+        <h2><span>01</span> projects</h2>
+        <a href="https://github.com/AngadBasandrai?tab=repositories" target="_blank" rel="noopener">github.com/AngadBasandrai</a>
+      </header>
+
+      <div class="project-list">
+        <details class="project" open>
+          <summary>
+            <span class="project-id">01</span>
+            <strong>qirc</strong>
+            <span>rust, quantum computing</span>
+            <time>sep. 2026 - present</time>
+          </summary>
+          <div class="project-body">
+            <ul>
+              <li>implemented a qir compiler and built-in state-vector simulator from scratch in rust, supporting circuit validation, optimization, and execution.</li>
+              <li>implemented multi-format output, including openqasm 3, qir, json, and hardware-specific gate-set and qubit-layout transformations.</li>
+              <li>selected as a finalist in SegFault 2026, with an in-person presentation at IISc Bengaluru.</li>
+            </ul>
+            <div class="links">
+              <a href="https://github.com/AngadBasandrai/qirc" target="_blank" rel="noopener">github</a>
+              <a href="https://angadbasandrai.github.io/qirc/" target="_blank" rel="noopener">web</a>
+              <a href="https://angadbasandrai.github.io/qirc/book/" target="_blank" rel="noopener">docs</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="project">
+          <summary>
+            <span class="project-id">02</span>
+            <strong>syrix</strong>
+            <span>rust, opengl</span>
+            <time>july 2026</time>
+          </summary>
+          <div class="project-body">
+            <ul>
+              <li>implemented a from-scratch browser engine in rust, integrating 6 subsystems spanning html parsing, dom representation, layout, graphics, utilities, and browser chrome.</li>
+              <li>built a rendering pipeline that converts parsed dom trees into layout boxes and display commands before rasterising pages through an opengl renderer.</li>
+              <li>implemented 4 browser interactions: url navigation, hyperlink resolution, page reload, and home-page.</li>
+            </ul>
+            <div class="links"><a href="https://github.com/AngadBasandrai/syrix" target="_blank" rel="noopener">github</a></div>
+          </div>
+        </details>
+
+        <details class="project">
+          <summary>
+            <span class="project-id">03</span>
+            <strong>2d physics engine</strong>
+            <span>c++, opengl, glfw</span>
+            <time>sep. 2025 - july 2026</time>
+          </summary>
+          <div class="project-body">
+            <ul>
+              <li>implemented a real-time 2d physics engine using c++, opengl, and glfw, with rk4 numerical integration.</li>
+              <li>optimised the simulation pipeline to support 1,000+ bodies at 60+ fps during real-time execution.</li>
+              <li>implemented collision detection and physics-based interactions for simulated bodies.</li>
+            </ul>
+            <div class="links"><a href="https://github.com/AngadBasandrai/physics-engine/releases/tag/v1.0" target="_blank" rel="noopener">github</a></div>
+          </div>
+        </details>
+
+        <details class="project">
+          <summary>
+            <span class="project-id">04</span>
+            <strong>tune-ai</strong>
+            <span>python, peft, reinforcement learning</span>
+            <time>june 2026</time>
+          </summary>
+          <div class="project-body">
+            <ul>
+              <li>implemented a ppo-based prompt optimiser using qwen2.5-1.5b-instruct with lora fine-tuning and a groq-hosted llama 3.1 8b reward model.</li>
+              <li>trained the optimiser on synthetic noisy restaurant-order examples to improve prompt robustness.</li>
+              <li>used clipped policy and value losses with entropy regularisation and token-level advantage estimation.</li>
+            </ul>
+            <div class="links">
+              <a href="https://github.com/AngadBasandrai/tune-ai" target="_blank" rel="noopener">github</a>
+              <a href="blogs/tune-ai.html">read more</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="project">
+          <summary>
+            <span class="project-id">05</span>
+            <strong>PyScorch</strong>
+            <span>python, cuda</span>
+            <time>may 2026 - june 2026</time>
+          </summary>
+          <div class="project-body">
+            <ul>
+              <li>implemented a neural network library in python with cuda support for gpu-accelerated computation.</li>
+              <li>trained a neural network on mnist, achieving approximately 98% accuracy, comparable to pytorch while taking roughly twice the execution time.</li>
+            </ul>
+            <div class="links"><a href="https://github.com/AngadBasandrai/PyScorch" target="_blank" rel="noopener">github</a></div>
+          </div>
+        </details>
       </div>
 
-      <div class="sidebar-bottom">
-        <button class="toggle-btn" onclick="toggleTheme()" id="toggle-btn">[ light mode ]</button>
-        <div class="webring-box">
-          <span class="webring-name"><span class="wt">thread</span><span class="wl">locked</span></span>
-          <div class="webring-btns">
-            <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/redirect?from=angad&dir=prev'">&lt; prev</button>
-            <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/'">ring</button>
-            <button class="webring-btn" onclick="window.location.href='https://ring.seggs.lol/redirect?from=angad&dir=next'">next &gt;</button>
+      <div class="other-work">
+        <h3>other work</h3>
+        <div class="other-row">
+          <div><strong>iiest.wiki</strong><span>founder and maintainer, including its associated subwebsites</span></div>
+          <div class="links">
+            <a href="https://iiest.wiki" target="_blank" rel="noopener">site</a>
+            <a href="https://github.com/AngadBasandrai/iiest-wiki" target="_blank" rel="noopener">github</a>
           </div>
         </div>
-      </div>
-    </nav>
-
-    <main class="main" id="main">
-
-      <div id="home" class="page active">
-        <div class="page-title">// about me</div>
-        <div class="page-body">
-          <p>18 yr old cs undergrad from india, batch of 29</p>
-          <div class="quote">"Work harder, not smarter."</div>
-          <p>I code, game, listen to music and stare at the stars.</p>
-          <div class="quote">"If you gaze for long into an abyss, the abyss gazes also into you."</div>
-        </div>
-      </div>
-
-      <div id="blogs" class="page">
-        <div class="page-title">// blogs</div>
-        <div id="blog-list-container">
-          <div class="blog-loading">loading...</div>
-        </div>
-      </div>
-
-      <div id="projects" class="page">
-        <div class="page-title">// projects</div>
-
-        <div class="section-rule"><a href="https://github.com/AngadBasandrai/">personal &mdash; github.com/AngadBasandrai</a></div>
-
-        <div class="entry">
-          <div class="entry-title">tune-ai</div>
-          <div class="entry-sub">python, peft &middot; 2026 &middot; <a href="blogs/tune-ai">read more</a></div>
-          <div class="entry-desc">reinforcement learning pipeline that uses scratch to fine-tune a 1.5B parameter LLM</div>
-          <div class="entry-desc">attached a custom value head and LoRA adapters to Qwen2.5 to train policy and value functions jointly</div>
-          <div class="entry-desc">used a Groq-hosted Llama model as a reward model</div>
-          <div class="entry-desc">implemented clipped surrogate loss, advantage estimation, and KL tracking across 60-step training runs</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">PyScorch</div>
-          <div class="entry-sub">python, cuda &middot; 2026</div>
-          <div class="entry-desc">lightweight neural net library from scratch using numpy &amp; cupy</div>
-          <div class="entry-desc">Kaiming initialisation to prevent vanishing gradients</div>
-          <div class="entry-desc">batching for large datasets &mdash; better speed &amp; less overfitting</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">chronix-os</div>
-          <div class="entry-sub">x86asm, C &middot; 2026</div>
-          <div class="entry-desc">minimal OS written from scratch in x86asm</div>
-          <div class="entry-desc">bootloader loads into protected-mode and boots a C kernel</div>
-          <div class="entry-desc">rudimentary IDT</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">snake-lab</div>
-          <div class="entry-sub">python &middot; 2026</div>
-          <div class="entry-desc">simple DQN that plays snake</div>
-          <div class="entry-desc">hyperparameter analysis: lr, &epsilon; decay, &gamma;</div>
-          <div class="entry-desc">multi-agent sim to compare trained models</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">Physics Engine</div>
-          <div class="entry-sub">C++, OpenGL &middot; 2025</div>
-          <div class="entry-desc">lightweight physics engine from scratch in C++ using OpenGL</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">boids</div>
-          <div class="entry-sub">Unity, C# &middot; 2023</div>
-          <div class="entry-desc">faithful implementation of Craig Reynolds' Boids algorithm</div>
-          <div class="entry-desc">multiple species types for more complex flocking behaviours</div>
-        </div>
-
-        <div class="section-rule"><a href="https://github.com/0xIIEST/">org &mdash; github.com/0xIIEST</a></div>
-
-        <div class="entry">
-          <div class="entry-title">lyrnios-ai</div>
-          <div class="entry-sub">python, react, fastapi, uvicorn &middot; 2025 &middot; <a href="lyrniosai.vercel.app">lyrniosai.vercel.app</a></div>
-          <div class="entry-desc">multimodal AI assistant that generates personalised learning content</div>
-          <div class="entry-desc">built-in TTS via puter.js</div>
-          <div class="entry-desc">math rendering via KaTeX</div>
-        </div>
-      </div>
-      <div id="education" class="page">
-        <div class="page-title">// education</div>
-        <div class="entry">
-          <div class="entry-title">IIEST Shibpur</div>
-          <div class="entry-sub">B.Tech Computer Science and Technology &middot; 2025&ndash;2029</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">Kundan Vidya Mandir</div>
-          <div class="entry-sub">Class XII &middot; PCM + Computer Science &middot; Apr 2023&ndash;Mar 2025</div>
-          <div class="entry-desc">90.2%</div>
-          <div class="entry-desc">Head Boy</div>
-          <div class="entry-desc">Captained school chess team to multiple competitions</div>
-        </div>
-        <div class="entry">
-          <div class="entry-title">Kundan Vidya Mandir</div>
-          <div class="entry-sub">Class X &middot; Apr 2011&ndash;Mar 2023</div>
-          <div class="entry-desc">94.2%</div>
-        </div>
-      </div>
-
-      <div id="certifications" class="page">
-        <div class="page-title">// certifications</div>
-        <div class="cert-entry">
-          <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/C560BAQHr9suxyJBXMw/company-logo_100_100/company-logo_100_100/0/1635534378870/stanford_university_logo?e=1781740800&v=beta&t=5eA9qSkrY9DwAyNYbjaSDNriiSromygreX1aL7AxdV4"/></div>
-          <div class="cert-content">
-            <div class="cert-title">Machine Learning Specialization</div>
-            <div class="cert-desc">Stanford University, DeepLearning.ai &middot; March 2024</div>
-            <a href="https://www.coursera.org/account/accomplishments/specialization/GHJ2VE7PGCPF">[verify credential]</a>
-          </div>
-        </div>
-        <div class="cert-entry">
-          <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/C510BAQFCGqEmSwrc4w/company-logo_100_100/company-logo_100_100/0/1631338994369?e=1781740800&v=beta&t=Mqz4rTen1Og0khpP6Aq6vZRcsj5rHDDsdRRhoGd1BvA"/></div>
-          <div class="cert-content">
-            <div class="cert-title">The Evolving Universe</div>
-            <div class="cert-desc">Caltech &middot; February 2023</div>
-            <a href="https://www.coursera.org/account/accomplishments/verify/DBU2VY75DW9N">[verify credential]</a>
-          </div>
-        </div>
-        <div class="cert-entry">
-          <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/D4E0BAQGBQSFW_T23Uw/company-logo_100_100/company-logo_100_100/0/1685099501709/trinity_college_london_logo?e=1781740800&v=beta&t=lkKG7UA7kKzgIvy6HKhFMWyjSOOdZHdnp7IcavZ9Yyw"/></div>
-          <div class="cert-content">
-            <div class="cert-title">Electronic Keyboard, Grade 5</div>
-            <div class="cert-desc">Trinity College London &middot; September 2022</div>
-          </div>
-        </div>
-        <div class="cert-entry">
-          <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/D4E0BAQGBQSFW_T23Uw/company-logo_100_100/company-logo_100_100/0/1685099501709/trinity_college_london_logo?e=1781740800&v=beta&t=lkKG7UA7kKzgIvy6HKhFMWyjSOOdZHdnp7IcavZ9Yyw"/></div>
-          <div class="cert-content">
-            <div class="cert-title">Theory of Music, Grade 2</div>
-            <div class="cert-desc">Trinity College London &middot; December 2019</div>
-          </div>
-        </div>
-        <div class="cert-entry">
-          <div class="cert-logo"><img src="https://media.licdn.com/dms/image/v2/C4D0BAQFSi1nlisxTcg/company-logo_100_100/company-logo_100_100/0/1631312234132?e=1781740800&v=beta&t=4KY4rEeDzJLys680bX49irlnL8VfKdwlWEFnTbmAfCE"/></div>
-          <div class="cert-content">
-            <div class="cert-title">Fundamentals of Music Theory</div>
-            <div class="cert-desc">The University of Edinburgh &middot; January 2019</div>
-            <a href="https://www.coursera.org/account/accomplishments/verify/2STWG9TU4RLE">[verify credential]</a>
+        <div class="other-row">
+          <div><strong>IIEST campus map</strong><span>installable, offline-capable map of IIEST Shibpur and the kilometre of Howrah around it</span></div>
+          <div class="links">
+            <a href="https://maps.grafitelab.in/" target="_blank" rel="noopener">site</a>
+            <a href="https://github.com/AngadBasandrai/mapiiest" target="_blank" rel="noopener">github</a>
           </div>
         </div>
       </div>
+    </section>
 
-      <div id="misc" class="page">
-        <div class="page-title">// misc</div>
-        <div class="page-body">
-          <p>just a silly guy enjoying life</p>
-          <p>
-            <a href="https://open.spotify.com/playlist/5FhcqEunsibd1gmhsBsxci?si=bb0bc37715994f53">my elite spotify library</a>
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="#1DB954" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-left:4px;">
-              <path d="M8 0C3.589 0 0 3.589 0 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm3.67 11.548a.499.499 0 0 1-.686.166c-1.88-1.149-4.243-1.409-7.028-.772a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.687zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.322-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.153 5.561 6.234 5.43 3.89 6.138a.75.75 0 0 1-.433-1.432c2.696-.817 7.18-.659 10.012 1.115a.75.75 0 1 1-.777 1.281z"/>
-            </svg>
-          </p>
-          <p>if not coding, then playing trackmania</p>
-        </div>
+    <section class="section tab-panel" id="research">
+      <header class="section-header">
+        <h2><span>02</span> research</h2>
+        <span class="pending"><i></i> arXiv moderation pending</span>
+      </header>
 
-        <div class="misc-head">// stuff i've done</div>
+      <article class="paper">
+        <div class="paper-meta">
+          <span>cs.GT</span>
+          <time>sep. 2026 - present</time>
+          <span>preprint submitted, not yet publicly listed or peer reviewed</span>
+        </div>
+        <h3>Safe Opponent Exploitation in Colonel Blotto</h3>
+        <ul>
+          <li>implemented a double oracle framework with dynamic programming best-response oracles and linear programming over the equilibrium polytope to identify safety-constrained exploitation strategies.</li>
+          <li>developed an exact solver for Colonel Blotto games containing up to 4.3 x 10<sup>12</sup> pure strategies without enumerating the complete strategy space.</li>
+          <li>characterised gift regions for unequal battlefield values and improved the equal-value divisibility condition from n | B to 2B/n in Z.</li>
+          <li>evaluated exploitation strategies against 4,510 human allocations from FiveThirtyEight Riddler Nation tournaments.</li>
+        </ul>
+        <div class="links"><a href="https://github.com/AngadBasandrai/blotto-safe-exp" target="_blank" rel="noopener">github</a></div>
+      </article>
+    </section>
 
-        <div class="misc-item">
-          <div class="misc-icon"><img src="technofest.jpeg"/></div>
-          <div class="misc-item-content">
-            <div class="misc-item-title">Techno Fest 2024 &mdash; 1st Place</div>
-            <div class="misc-item-sub">BCM Foundation &middot; Aug 2024</div>
-            <div class="misc-item-desc">1st place both individual and team.</div>
-          </div>
+    <section class="section tab-panel" id="education">
+      <header class="section-header"><h2><span>03</span> education</h2></header>
+      <div class="ledger">
+        <div class="ledger-row">
+          <time>2025 - 2029</time>
+          <div><strong>IIEST Shibpur</strong><span>B.Tech Computer Science and Technology</span></div>
         </div>
-        <div class="misc-item">
-          <div class="misc-icon"><img src="rifle.jpg"/></div>
-          <div class="misc-item-content">
-            <div class="misc-item-title">District Shooting Championship &mdash; Silver</div>
-            <div class="misc-item-sub">10m Air Pistol Jr. Men &middot; District Rifle Association, Ludhiana &middot; June 2024</div>
-          </div>
+        <div class="ledger-row">
+          <time>2023 - 2025</time>
+          <div><strong>Kundan Vidya Mandir</strong><span>Class XII · PCM + Computer Science · 90.2% · Head Boy · Captained school chess team to multiple competitions</span></div>
         </div>
-        <div class="misc-item">
-          <div class="misc-icon"><img src="rifle.jpg"/></div>
-          <div class="misc-item-content">
-            <div class="misc-item-title">District Shooting Championship &mdash; Gold</div>
-            <div class="misc-item-sub">10m Air Pistol Men &middot; District Rifle Association, Ludhiana &middot; June 2024</div>
-          </div>
-        </div>
-        <div class="misc-item">
-          <div class="misc-icon"><img src="sahodya.jpeg"/></div>
-          <div class="misc-item-content">
-            <div class="misc-item-title">Ludhiana Sahodaya Inter School Chess &mdash; Runner Up</div>
-            <div class="misc-item-sub">LSSC &middot; August 2023</div>
-          </div>
-        </div>
-        <div class="misc-item">
-          <div class="misc-icon"><img src="techmanthan.jpeg"/></div>
-          <div class="misc-item-content">
-            <div class="misc-item-title">Tech Manthan 1.0 &mdash; Winner</div>
-            <div class="misc-item-sub">BCM Arya Model Sr. Sec. School, Ludhiana &middot; August 2023</div>
-          </div>
-        </div>
-        <div class="misc-item">
-          <div class="misc-item-content">
-            <div class="misc-item-title">District Chess Championship &mdash; Silver</div>
-            <div class="misc-item-sub">LDCA &middot; August 2022</div>
-          </div>
-        </div>
-        <div class="misc-item">
-          <div class="misc-icon"><img src="bharatkojano.jpeg"/></div>
-          <div class="misc-item-content">
-            <div class="misc-item-title">Bharat Ko Jano &mdash; Regional (North Zone), 2nd Runner Up</div>
-            <div class="misc-item-sub">Bharat Vikas Parishad &middot; December 2018</div>
-            <div class="misc-item-desc">1st place state level &middot; 2nd runner up regional level</div>
-          </div>
+        <div class="ledger-row">
+          <time>2011 - 2023</time>
+          <div><strong>Kundan Vidya Mandir</strong><span>Class X · 94.2%</span></div>
         </div>
       </div>
 
-    </main>
-  </div>
+      <div class="skills">
+        <div><span>languages</span><p>Rust, C++, C, Python, Java, JavaScript, SQL</p></div>
+        <div><span>systems &amp; frameworks</span><p>LLVM, OpenGL, GLFW, React, PyTorch, PEFT</p></div>
+        <div><span>tools</span><p>Git, Linux, Ghidra, Burp Suite</p></div>
+      </div>
+    </section>
+
+    <section class="section tab-panel" id="certifications">
+      <header class="section-header"><h2><span>04</span> certifications</h2></header>
+      <div class="cert-list">
+        <article class="cert">
+          <img src="assets/cert-stanford.svg" alt="Stanford University">
+          <div><strong>Machine Learning Specialization</strong><span>Stanford University, DeepLearning.AI · March 2024</span></div>
+          <a href="https://www.coursera.org/account/accomplishments/specialization/GHJ2VE7PGCPF" target="_blank" rel="noopener">verify</a>
+        </article>
+        <article class="cert">
+          <img src="assets/cert-caltech.svg" alt="Caltech">
+          <div><strong>The Evolving Universe</strong><span>Caltech · February 2023</span></div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/DBU2VY75DW9N" target="_blank" rel="noopener">verify</a>
+        </article>
+        <article class="cert">
+          <img src="assets/cert-trinity.svg" alt="Trinity College London">
+          <div><strong>Electronic Keyboard, Grade 5</strong><span>Trinity College London · September 2022</span></div>
+        </article>
+        <article class="cert">
+          <img src="assets/cert-trinity.svg" alt="Trinity College London">
+          <div><strong>Theory of Music, Grade 2</strong><span>Trinity College London · December 2019</span></div>
+        </article>
+        <article class="cert">
+          <img src="assets/cert-edinburgh.svg" alt="The University of Edinburgh">
+          <div><strong>Fundamentals of Music Theory</strong><span>The University of Edinburgh · January 2019</span></div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/2STWG9TU4RLE" target="_blank" rel="noopener">verify</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section tab-panel" id="misc">
+      <header class="section-header"><h2><span>05</span> misc</h2></header>
+      <div class="misc-copy">
+        <p>just a silly guy enjoying life</p>
+        <p><a href="https://open.spotify.com/playlist/5FhcqEunsibd1gmhsBsxci?si=bb0bc37715994f53" target="_blank" rel="noopener">my elite spotify library</a></p>
+        <p>if not coding, then playing trackmania</p>
+      </div>
+
+      <h3 class="subheading">stuff i've done</h3>
+      <div class="ledger compact">
+        <div class="ledger-row"><time>2026</time><div><strong>SegFault 2026 · Finalist</strong><span>qirc · IISc Bengaluru</span></div></div>
+        <div class="ledger-row"><time>Aug 2024</time><div><strong>Techno Fest 2024 · 1st Place</strong><span>BCM Foundation · 1st place both individual and team</span></div></div>
+        <div class="ledger-row"><time>June 2024</time><div><strong>District Shooting Championship · Silver</strong><span>10m Air Pistol Jr. Men · District Rifle Association, Ludhiana</span></div></div>
+        <div class="ledger-row"><time>June 2024</time><div><strong>District Shooting Championship · Gold</strong><span>10m Air Pistol Men · District Rifle Association, Ludhiana</span></div></div>
+        <div class="ledger-row"><time>Aug 2023</time><div><strong>Ludhiana Sahodaya Inter School Chess · Runner Up</strong><span>LSSC</span></div></div>
+        <div class="ledger-row"><time>Aug 2023</time><div><strong>Tech Manthan 1.0 · Winner</strong><span>BCM Arya Model Sr. Sec. School, Ludhiana</span></div></div>
+        <div class="ledger-row"><time>Aug 2022</time><div><strong>District Chess Championship · Silver</strong><span>LDCA</span></div></div>
+        <div class="ledger-row"><time>Dec 2018</time><div><strong>Bharat Ko Jano · Regional (North Zone), 2nd Runner Up</strong><span>Bharat Vikas Parishad · 1st place state level · 2nd runner up regional level</span></div></div>
+      </div>
+    </section>
+
+    <section class="section tab-panel" id="blogs">
+      <header class="section-header"><h2><span>06</span> blogs</h2></header>
+      <a class="blog-row" href="blogs/tune-ai.html">
+        <time>June 2026</time>
+        <strong>tune.ai</strong>
+        <span>Using PPO to fine-tune a small LLM to reformat messy restaurant orders. What worked, what didn't, and why the reward model is the whole game.</span>
+      </a>
+    </section>
+    <footer class="footer">
+      <span>© 2026 angad basandrai</span>
+    </footer>
+  </main>
 
   <script src="scripts.js"></script>
 </body>
