@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.title | escape }}">
+  <meta name="theme-color" content="#101211">
+  <title>{{ page.title | escape }} | angad basandrai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/ramblings/archive.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#content">skip to content</a>
+  <main class="archive-shell" id="content">
+    <header class="archive-header">
+      <a class="archive-mark" href="{{ '/ramblings/' | relative_url }}">~/ramblings</a>
+      <a class="home-link" href="{{ '/' | relative_url }}">home</a>
+    </header>
+    <article class="archive-entry">
+{{ content }}
+    </article>
+  </main>
+</body>
+</html>

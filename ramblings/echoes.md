@@ -1,3 +1,8 @@
+---
+layout: rambling
+title: "Echoes Part 1 - Meddle by Pink Floyd (1971)"
+---
+
 # Echoes Part 1 - Meddle by Pink Floyd (1971)
 
 Arguably one of the best and most succesful Pink Floyd songs ever.
