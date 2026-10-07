@@ -71,5 +71,9 @@ Whereas someone who is "balanced on the biggest wave" may feel like they are suc
 <h3> Deeper connections to the album </h3>
 This song serves as the link that all future songs refer to and build upon in this album, deceptively simple, in it's two minutes it conveys far more than most of us can convey in hours. It builds the premise of existence, the why, the how, the how not to, the motivations of the narrator, and the mental state of the listener and the narrator.
 
+## My short interpretation of the song as part of a thought process that the album is
+Once the person goes sleep this song is what he is thinking about, about his existence, realising what his life is, what he wants it to be, and what he needs to do.
+
 <hr/>
 <a href="https://angadbasandrai.github.io/ramblings/pink_floyd/dsotm/speak_to_me.html"> Previous </a>
+<a href="https://angadbasandrai.github.io/ramblings/pink_floyd/dsotm/on_the_run.html"> Next </a>
