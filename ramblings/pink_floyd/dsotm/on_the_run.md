@@ -29,4 +29,5 @@ As the dream starts to come to a close, the person is drifting in a state of hal
 
 <hr/>
 <a href="https://angadbasandrai.github.io/ramblings/pink_floyd/dsotm/breathe.html"> Previous </a>
+<br/>
 <a href="https://angadbasandrai.github.io/ramblings/pink_floyd/dsotm/time.html"> Next </a>
