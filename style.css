@@ -483,6 +483,10 @@ ul {
   display: none;
 }
 
+.research-entry summary {
+  grid-template-columns: 34px minmax(0, 1fr) auto auto;
+}
+
 .project summary::after {
   content: "+";
   position: absolute;
