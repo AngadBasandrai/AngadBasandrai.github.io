@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Making Microsoft Word run code with field codes, mail merge, a Turing machine, and a small language called Quill.">
+  <meta name="theme-color" content="#101211">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101211'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='monospace' font-size='30' fill='%2388a98d'%3EAB%3C/text%3E%3C/svg%3E">
+  <title>MS Word + Mail Merge = Turing Complete(?) | angad basandrai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <a class="skip-link" href="#article">skip to content</a>
+
+  <header class="mobile-header">
+    <a href="../index.html#home">angad basandrai</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar">menu</button>
+  </header>
+
+  <aside class="sidebar" id="sidebar" aria-label="Site sidebar">
+    <div class="sidebar-top">
+      <a class="wordmark" href="../index.html#home">angad basandrai</a>
+      <img class="profile-image" src="../main.jpg" alt="Angad Basandrai" width="88" height="88">
+      <p class="sidebar-role">CS Undergrad @ IIEST Shibpur<br>batch of '29</p>
+
+      <nav class="tab-nav" aria-label="Primary navigation">
+        <a href="../index.html#home"><span>01</span>home</a>
+        <a href="../index.html#projects"><span>02</span>projects</a>
+        <a href="../index.html#research"><span>03</span>research</a>
+        <a href="../index.html#education"><span>04</span>education</a>
+        <a href="../index.html#certifications"><span>05</span>certifications</a>
+        <a href="../index.html#misc"><span>06</span>misc</a>
+        <a class="active" href="../index.html#blogs"><span>07</span>blogs</a>
+      </nav>
+
+      <nav class="sidebar-links" aria-label="Profiles and contact">
+        <a href="https://github.com/AngadBasandrai" target="_blank" rel="noopener">github</a>
+        <a href="https://linkedin.com/in/angad-basandrai" target="_blank" rel="noopener">linkedin</a>
+        <a href="mailto:angadbasandrai@gmail.com">email</a>
+        <a href="../AngadBasandrai.pdf" target="_blank" rel="noopener">resume</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-status"><span><i></i> online</span><time id="clock">--:-- IST</time></div>
+      <div class="webring-box">
+        <span class="webring-name"><span class="wt">thread</span><span class="wl">locked</span></span>
+        <div class="webring-btns">
+          <a class="webring-btn" href="https://ring.seggs.lol/redirect?from=angad&amp;dir=prev">&lt; prev</a>
+          <a class="webring-btn" href="https://ring.seggs.lol/">ring</a>
+          <a class="webring-btn" href="https://ring.seggs.lol/redirect?from=angad&amp;dir=next">next &gt;</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <button class="sidebar-scrim" type="button" aria-label="Close menu"></button>
+
+  <nav class="webring-mobile" aria-label="Webring navigation">
+    <span class="webring-name"><span class="wt">thread</span><span class="wl">locked</span></span>
+    <div class="webring-btns">
+      <a class="webring-btn" href="https://ring.seggs.lol/redirect?from=angad&amp;dir=prev">&lt; prev</a>
+      <a class="webring-btn" href="https://ring.seggs.lol/">ring</a>
+      <a class="webring-btn" href="https://ring.seggs.lol/redirect?from=angad&amp;dir=next">next &gt;</a>
+    </div>
+  </nav>
+
+  <main id="article">
+    <article class="article-main" aria-labelledby="post-title">
+      <a class="article-back" href="../index.html#blogs">&lt; back</a>
+
+      <header class="article-head" id="overview">
+        <p class="path">/home/angad/blogs/word-turing-complete.md</p>
+        <h1 id="post-title">MS Word + Mail Merge = Turing Complete(?)</h1>
+        <div class="article-meta"><time datetime="2026-11-11">november 2026</time><span>ms word, field codes, quill</span></div>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-contents" aria-label="Article sections">
+          <details open>
+            <summary>on this page</summary>
+            <nav aria-label="Jump to section">
+              <ol>
+                <li><a href="#overview">overview</a></li>
+                <li><a href="#abstract-o">Abstract :O</a></li>
+                <li><a href="#why-i-ended-up-here">Why I ended up here</a></li>
+                <li><a href="#in-search-of-gold-we-found-silver">In search of gold, we found silver</a></li>
+                <li><a href="#how-can-we-run-it-then">How can we run it then?</a>
+                  <ol>
+                    <li><a href="#turing-machine">Turing Machine?</a></li>
+                    <li><a href="#coding-with-word">Coding with Word</a></li>
+                    <li><a href="#word-apple">Word Apple?</a>
+                      <ol>
+                        <li><a href="#word-media-player">Word Media Player?</a></li>
+                      </ol>
+                    </li>
+                    <li><a href="#conways-game-of-word">Conway&#x27;s Game of Word</a></li>
+                    <li><a href="#quill">Quill</a></li>
+                  </ol>
+                </li>
+                <li><a href="#do-they-know">Do they know?</a></li>
+                <li><a href="#sources">Sources</a></li>
+              </ol>
+            </nav>
+          </details>
+        </aside>
+
+        <div class="article-copy">
+          <section aria-labelledby="abstract-o" class="article-section">
+            <h2 id="abstract-o" tabindex="-1">Abstract :O</h2>
+            <p>Yes, MS Word can run almost any code. I hope to make, and see others make cool stuff inside it soon. The basics are, field codes are the processor, the rows of the data source are the clock, and memory is well, the memory. Of course it is very slow and there are quite a few things it cannot do. With that out of the way let's get into the full journey:</p>
+          </section>
+          <section aria-labelledby="why-i-ended-up-here" class="article-section">
+            <h2 id="why-i-ended-up-here" tabindex="-1">Why I ended up here</h2>
+            <p>Ans: <em>Minecraft</em></p>
+            <p>I was doomscrolling on YouTube when <a href="https://www.youtube.com/mattbatwings">mattbatwings'</a> videos showed up on my home page. As is my duty, I started watching them and decided to implement something similar in Minecraft, but digging more into it I realised there was nothing new for me to do. Everyone had done everything.</p>
+            <p>So second best thing, I decided to try Terraria, then I realised I absolutely do not enjoy playing Terraria (I said what I said). Then I looked into the OG SimCity (Micropolis). I thought maybe like the power grid could somehow be used like wires and I could use logic using capacity of the plants. But well firstly, every change to the map (fire, road etc.) is random and there is no memory or clock.</p>
+            <p>Tired I sort of gave up because my end-sem exams are looming. Decided to study, opened a file and started studying then got hit with a plan.</p>
+          </section>
+          <section aria-labelledby="in-search-of-gold-we-found-silver" class="article-section">
+            <h2 id="in-search-of-gold-we-found-silver" tabindex="-1">In search of gold, we found silver</h2>
+            <p>The file I was studying from was a '.docx', jokingly I thought might as well try to see if Word could work. So I found Word has a small programming language inside it, <em>Field Codes</em>. <code>SET</code> sets a value, <code>REF</code> gets a value, <code>IF</code> is a conditional, and <code>=</code> is for mathematical operations. But you might be wondering that is not enough to run a computer.</p>
+          </section>
+          <section aria-labelledby="how-can-we-run-it-then" class="article-section">
+            <h2 id="how-can-we-run-it-then" tabindex="-1">How can we run it then?</h2>
+            <p>Two words: Mail Merge</p>
+            <p>Vanilla Word is "great" for computation, but it cannot loop. It's just <code>F9</code> and everything runs. Stuff ran through <code>SET</code> does stick around so we can just assume <code>F9</code> to be one cycle of the clock. But of course it requires human input. In comes Mail Merge, it simulates <code>F9</code> once for every row in the data source. So every row is a clock cycle, give it enough cycles and it is technically <strong>'Turing Complete'</strong>.</p>
+            <p>Side note: I had no clue Mail Merge was even thing before today, I still don't know it's actual use.</p>
+            <p>But theory is great for theorists, I had to try it, so I wrote a very basic Python script to make Word files filled with loops and conditionals.</p>
+            <p>The good news first:</p>
+            <ul>
+              <li>Values survive between rows, a <code>SET</code> in row 2 can see what row 1 stored. So, we have a clock.</li>
+              <li>Strings can grow forever, <code>{SET s "{REF s}1"}</code> just adds a character every row.</li>
+              <li><code>IF</code> can do wildcards, and the pattern can be built while it runs. <code>{IF "{REF L}" = "{REF P}1*" ...}</code> basically asks "does L start with P and then a 1?". This ended up being the whole trick.</li>
+            </ul>
+            <p>But some issues were clear:</p>
+            <ul>
+              <li>We dont have variables, per se, I can't really use <code>SET</code> to update an existing field, 50 <code>SET</code> calls mean 50 memory cells. So, no arrays.</li>
+              <li>Numbers are just doubles, exact up to about 14 digits, so I can't hide infinite memory inside one giant number either.</li>
+              <li>There is no substring function. I can add to a string and check it against a pattern, but I can't take anything out of it. Thanks, Word.</li>
+            </ul>
+            <p>How disappointing to find Word was not built to hold arrays, typical Microsoft.</p>
+            <section aria-labelledby="turing-machine" class="article-section">
+              <h3 id="turing-machine" tabindex="-1">Turing Machine?</h3>
+              <p>A Turing machine is just a tape, a head that reads and writes one cell at a time, and a few rules. So I needed three things out of Word.</p>
+              <p><strong>The tape</strong>: two strings, one for everything left of the head and one for everything right of it.</p>
+              <p><strong>Reading</strong>: easy, a wildcard check. <code>{IF "{REF R}" = "1*" ...}</code> literally asks "does the right side start with a 1?".</p>
+              <p><strong>Moving the head</strong>: this is where Word fought back. Moving means taking a character off one of the strings, and as we found out, Word can't take anything out of a string. So I rebuild it instead. Every row, Word copies one more character into a new string, and stops once the copy is exactly one character shorter. Painfully slow, but there's no limit on how far it can go, and that's all Turing completeness cares about.</p>
+              <p>To check it actually works, I ran busy beavers (tiny machines famous for running as long as possible before stopping) and compared every single step with a normal Python version. The 3-state one stopped after 14 steps with 6 ones on the tape, in 26 seconds. The 4-state one took 107 steps, left 13 ones and needed about 6 minutes. Both matched Python exactly so yay me.</p>
+              <p>Here's my small justification for why needing "enough" rows isn't "cheating". The rows are just the numbers 1, 2, 3 and so on, and nobody touches anything while it runs. It's a time limit, and every real computer has one of those too.</p>
+              <p>Yes this doesn't "prove" that it is indeed Turing Complete, but <a href="https://en.wikipedia.org/wiki/Extrapolation">read more</a></p>
+            </section>
+            <section aria-labelledby="coding-with-word" class="article-section">
+              <h3 id="coding-with-word" tabindex="-1">Coding with Word</h3>
+              <p>Next up, after I convinced (gaslit) myself into believing it's Turing Complete, I tried to run python.</p>
+              <p>What am I talking about you may be wondering, good question.</p>
+              <p>I wrote a small script that can take a limited subset of Python and convert it into the relevant Word code, and also builds the data file with the number of rows needed.</p>
+              <p>For example, <code>a = b</code> becomes <code>{ SET va { IF { REF pc } = 1 { = ({ REF vb }+0) \# 0 } { REF va } } }</code>. Yes. You read that right.</p>
+              <p>Word runs fields top to bottom, so jumping forward happens in the same row, and jumping back (a loop) waits for the next row. One row is roughly one loop iteration.</p>
+              <p>It can run conditionals, loops, printing and even tuple assignment. What it cannot do is functions or lists.</p>
+              <p>And before you ask, it is PAINFULLY slow. A small printing with 2 conditions takes like 10 seconds. 25 Fibonacci numbers took a similar time.</p>
+              <p>BUT IT WORKS!</p>
+            </section>
+            <section aria-labelledby="word-apple" class="article-section">
+              <h3 id="word-apple" tabindex="-1">Word Apple?</h3>
+              <p>Yes it can run Bad Apple.</p>
+              <p>The data file is the video: 1,314 frames at 6 fps, each shrunk to 32 by 24 black and white pixels. Every row of pixels is stored as two numbers, so one frame is one row of 48 numbers. The Word document is the player. It has one field per pixel (768 per frame) that pulls that pixel's bit out with <code>MOD</code> and <code>INT</code> and draws <code>██</code> or a blank. This is achieved with <code>{ IF { = MOD(INT({ MERGEFIELD r5a }/1024),2) } = 1 "██" "  " }</code>. Dont even joke about it, lad.</p>
+              <p>Every frame = 1 page. Oh and TIL: according to word <code>INT(4294967294/2)</code> = <code>-1</code>. VERY Logical.</p>
+              <p>Each frame took me about 3 seconds to render. The whole song about 75 minutes. But now was the real problem.</p>
+              <section aria-labelledby="word-media-player" class="article-section">
+                <h4 id="word-media-player" tabindex="-1">Word Media Player?</h4>
+                <p>I'll be honest, I don't know how to do it, except:<br/>
+          A) holding PageDown and zooming past pages to see a flipbook style animation.<br/>
+          B) exporting the frames to a PDF, stitch to a GIF and see that.</p>
+                <p>So yes, disappointing and anti-climactic, I know, but that's life.</p>
+              </section>
+            </section>
+            <section aria-labelledby="conways-game-of-word" class="article-section">
+              <h3 id="conways-game-of-word" tabindex="-1">Conway's Game of Word</h3>
+              <p>Since Bad Apple can't actually "play", I decided to make something that does actually "play" inside Word.</p>
+              <p><strong>The Board</strong>: each cell is a bookmark, <code>C_4_5</code> and so on. The board wraps around the edges.</p>
+              <p><strong>Update</strong>: The whole update is only single formula <code>{= ABS(2*S+c-6)&lt;=1}</code>. Hey, no one said Word Code is clean and understandable.</p>
+              <p><strong>The Clock</strong>: <code>Ctrl+A</code>, then <code>F9</code>. That's the whole clock. Word recalculates every field once, top to bottom, and anything stored with <code>SET</code> sticks around, so the board from the last press is the input for the next one. One press, one generation.</p>
+              <p><strong>Custom Boards</strong>: Under the board there's a grid of <code>.</code> and <code>#</code>, each row a plain bookmark you can type over. Every press, Word reads it with wildcards (<code>{IF "{REF p_3}" = "|????#*" 1 0}</code> means "is the 5th cell a <code>#</code>?") and compares it with what it saw last press. If you changed anything, the board loads your drawing instead of stepping. The <code>|</code> on each end keep your typing inside the bookmark.</p>
+            </section>
+            <section aria-labelledby="quill" class="article-section">
+              <h3 id="quill" tabindex="-1">Quill</h3>
+              <p>Earlier I was using python code, but that made me have to think what can and can't work in Word. So meet <strong>Quill</strong></p>
+              <pre><code>let n = arg(1)
+let a = 0
+let b = 1
+while n &gt; 0 {
+    print a
+    let t = a + b
+    a = b
+    b = t
+    n -= 1
+}
+</code></pre>
+              <p>Whole numbers, <code>if</code>, <code>while</code>, <code>print</code> and command line arguments. No functions or arrays, because Word can't do those either. The compiler is one 520 KB Rust exe, and <code>quill run fib.ql 10</code> opens Word in the background, runs the merge and prints the answer. It even has proper error messages, and catches anything Word would choke on before Word ever opens.</p>
+            </section>
+          </section>
+          <section aria-labelledby="do-they-know" class="article-section">
+            <h2 id="do-they-know" tabindex="-1">Do they know?</h2>
+            <p>I looked everywhere I could: gwern's list of surprisingly Turing-complete things, the "Accidentally Turing-Complete" list, SIGBOVIK, esolangs, GitHub, and the Word expert forums. People have done PowerPoint, Excel formulas and even Jira. For Word, the only thing I found is a lone Hacker News comment saying "Word itself is turing complete", with nothing to back it up. So I am reasonably confident people haven't looked into this deep enough...</p>
+          </section>
+          <section aria-labelledby="sources" class="article-section">
+            <h2 id="sources" tabindex="-1">Sources</h2>
+            <p><a href="https://github.com/AngadBasandrai/quill/releases/tag/v0.1.0">quill</a></p>
+            <ul>
+              <li><a href="https://gwern.net/turing-complete">gwern: Surprisingly Turing-Complete</a></li>
+              <li><a href="https://beza1e1.tuxen.de/articles/accidentally_turing_complete.html">Andreas Zwinkau: Accidentally Turing-Complete</a></li>
+              <li><a href="https://www.andrew.cmu.edu/user/twildenh/PowerPointTM/Paper.pdf">Tom Wildenhain: On the Turing Completeness of MS PowerPoint (SIGBOVIK 2017)</a></li>
+              <li><a href="http://www.felienne.com/archives/2974">Felienne Hermans: a Turing machine in Excel formulas</a></li>
+              <li><a href="https://seriot.ch/computation/jira.html">Jira is Turing-Complete</a></li>
+              <li><a href="https://news.ycombinator.com/item?id=19168700">Hacker News: "Word itself is turing complete"</a></li>
+              <li><a href="https://github.com/SimHacker/micropolis">Micropolis source</a></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script src="../scripts.js"></script>
+  <script src="article.js"></script>
+</body>
+</html>

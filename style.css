@@ -786,13 +786,17 @@ ul {
 
 .blog-row {
   display: grid;
-  grid-template-columns: 100px 140px 1fr;
+  grid-template-columns: 100px minmax(160px, 1fr) minmax(0, 2fr);
   gap: 22px;
   padding: 19px 10px;
   color: var(--muted);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   text-decoration: none;
+}
+
+.blog-row + .blog-row {
+  border-top: 0;
 }
 
 .blog-row:hover {
@@ -820,8 +824,14 @@ ul {
   font-size: 10px;
 }
 
+#article {
+  width: auto;
+  max-width: 1120px;
+  margin-right: clamp(24px, 3vw, 48px);
+}
+
 .article-main {
-  max-width: 780px;
+  min-width: 0;
 }
 
 .article-back {
@@ -831,6 +841,7 @@ ul {
 }
 
 .article-head {
+  max-width: 780px;
   margin-bottom: 38px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--line);
@@ -842,13 +853,25 @@ ul {
 
 .article-meta {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   color: var(--faint);
   font-size: 10px;
   text-transform: uppercase;
 }
 
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 780px) 200px;
+  align-items: start;
+  gap: 36px;
+}
+
 .article-copy {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: #c5c8c3;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 16px;
@@ -859,18 +882,145 @@ ul {
   margin-bottom: 22px;
 }
 
-.article-copy h2 {
-  margin: 52px 0 17px;
+.article-copy h2,
+.article-copy h3,
+.article-copy h4 {
   color: var(--text-strong);
   font-family: var(--mono);
-  font-size: 18px;
   font-weight: 500;
+  line-height: 1.5;
   letter-spacing: -0.025em;
+}
+
+.article-copy h2 {
+  margin: 0 0 17px;
+  font-size: 18px;
+}
+
+.article-copy h3 {
+  margin: 36px 0 16px;
+  font-size: 16px;
+}
+
+.article-copy h4 {
+  margin: 28px 0 14px;
+  font-size: 14px;
+}
+
+.article-head[id],
+.article-copy [id] {
+  scroll-margin-top: 28px;
+}
+
+.article-copy > .article-section + .article-section {
+  margin-top: 38px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.article-copy h2::before,
+.article-copy h3::before,
+.article-copy h4::before {
+  color: var(--faint);
 }
 
 .article-copy h2::before {
   content: "## ";
-  color: var(--faint);
+}
+
+.article-copy h3::before {
+  content: "### ";
+}
+
+.article-copy h4::before {
+  content: "#### ";
+}
+
+.article-copy ul,
+.article-copy ol {
+  margin: 0 0 22px;
+  padding-left: 25px;
+}
+
+.article-copy li + li {
+  margin-top: 8px;
+}
+
+.article-copy code {
+  padding: 2px 5px;
+  color: var(--text-strong);
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 0.8em;
+}
+
+.article-copy pre {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 24px 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  line-height: 1.65;
+  overflow-wrap: normal;
+}
+
+.article-copy pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.article-contents {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: 28px;
+  min-width: 0;
+  padding-left: 18px;
+  border-left: 1px solid var(--line);
+  font-size: 11px;
+}
+
+.article-contents summary {
+  color: var(--text-strong);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.article-contents nav {
+  max-height: calc(100dvh - 110px);
+  overflow-y: auto;
+  margin-top: 14px;
+  scrollbar-width: thin;
+}
+
+.article-contents ol {
+  padding: 0;
+  list-style: none;
+}
+
+.article-contents ol ol {
+  padding-left: 12px;
+  border-left: 1px solid var(--line-soft);
+}
+
+.article-contents a {
+  display: block;
+  padding: 5px 0;
+  color: var(--muted);
+  line-height: 1.55;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.article-contents a:hover,
+.article-contents a:focus-visible,
+.article-contents a[aria-current="location"] {
+  color: var(--accent-bright);
+}
+
+.article-contents a[aria-current="location"] {
+  font-weight: 600;
 }
 
 .article-note {
@@ -882,6 +1032,28 @@ ul {
   font-family: var(--mono);
   font-size: 12px;
   line-height: 1.7;
+}
+
+@media (max-width: 1200px) {
+  .article-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 780px;
+  }
+
+  .article-contents {
+    position: static;
+    order: -1;
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .article-contents nav {
+    max-height: 50dvh;
+  }
 }
 
 @media (max-width: 900px) {
@@ -988,6 +1160,11 @@ ul {
 
   .intro {
     padding-top: 4vh;
+  }
+
+  .article-head[id],
+  .article-copy [id] {
+    scroll-margin-top: 74px;
   }
 
   .quote {
